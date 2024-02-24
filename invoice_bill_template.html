@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice</title>
+</head>
+<body>
+<table width="100%" style="margin-left: 20px;margin-right: 20px; margin-top: -10px;" class="invoice-table">
+    <tr>
+        <td><h1 style="font-size: 32px;" align="left">Invoice</h1></td>
+        <td><h1 style="font-size: 32px;" align="right">Quick Car Hire</h1></td>
+    </tr>
+    <tr>
+        <td>
+            <h2>Customer Details</h2>
+            <p>Name : {{customer_name}}</p>
+            <p>Email Id : {{email}}</p>
+            <p>Contact No : {{customer_contact}}</p>
+            <p>Licence No : {{customer_dl}}</p>
+            <p>Aadharcard No : {{customer_an}}</p>
+        </td>
+        <td>
+            <h2>Company Details</h2>
+            <p>Name : Quick Car Hire</p>
+            <p>Email Id : {{city_email}}</p>
+            <p>Contact No : {{city_mobile}}</p>
+            <p>City : {{city}}</p>
+            <p>Address : {{city_address}}</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h2>Car Details</h2>
+            <p>Car Registration No : {{registration_no}}</p>
+            <p>Car Name : {{car_name}}</p>
+            <p>Car Brand : {{car_brand}}</p>
+            <p>Car Image : <br/><img src="images/carimg/{{car_image}}" alt="Car Image" width="200px"></p>
+        </td>
+        <td>
+            <h2>Booking Details</h2>
+            <p>Booking ID : {{booking_id}}</p>
+            <p>Start Date : {{start_date}} </p>
+            <p>End Date : {{end_date}}</p>
+            <p>Start Time : {{start_time}}</p>
+            <p>End Time : {{end_time}}</p>
+            <p>Selected KMs : {{selected_kms}} KMs</p>
+            <p>Security Deposit : RS. {{security_deposit}}</p>
+<!--            <p>Booking Amount : RS. {{booking}}</p>-->
+            <p>Offer Amount : RS. {{offer}}</p>
+            <p>Total Amount : RS. {{total}}</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <h3>Term & Conditions</h3>
+            <p>1)Extra kms charge : {{charge}} per KM &nbsp;&nbsp;&nbsp; 2)Fuel : Full Tank</p>
+            <p>3)Tolls, Parking & Inter-state taxes : To be paid by you</p>
+            <p>4)Cancellation Charges : RS. 500 before booking start date and after not cancel</p>
+            <p>5)ID Verification : Please keep your original Driving License handy.</p>
+            <p>6)Pre-Handover Inspection : Please inspect the car (including the fuel gauge and odometer) thoroughly before approving the checklist.</p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

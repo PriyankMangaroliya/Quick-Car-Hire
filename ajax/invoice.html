@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quick Car Hire | Invoice</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet"
+              href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="../style.css" />
+        <style>
+            img {
+                float: right;
+                margin-right: 130px;
+            }
+
+            .s2 {
+                margin-top: 10px;
+                margin-left: 20px;
+                margin-right: 20px;
+                text-align: right;
+            }
+
+            .container {
+                display: flex;
+            }
+
+            .order,
+            .customer,
+            .address,
+            .info {
+                flex: 1;
+                padding: 10px;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                text-indent: 0;
+            }
+
+            .qr-container{
+                text-align: right;
+                padding-right: 210px
+            }
+
+            h2 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: normal;
+                font-weight: bold;
+                text-decoration: none;
+                font-size: 9pt;
+            }
+
+            .s1 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: none;
+                font-size: 9pt;
+            }
+
+            h1 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: normal;
+                font-weight: bold;
+                text-decoration: none;
+                font-size: 12pt;
+            }
+
+            h3 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: italic;
+                font-weight: bold;
+                text-decoration: none;
+                font-size: 7pt;
+            }
+
+            .p,
+            p {
+                color: black;
+                font-family: "Times New Roman", serif;
+                font-style: italic;
+                font-weight: normal;
+                text-decoration: none;
+                font-size: 7pt;
+                margin: 0pt;
+            }
+
+            .s2 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: none;
+                font-size: 8pt;
+            }
+
+            .s3 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: italic;
+                font-weight: normal;
+                text-decoration: none;
+                font-size: 7pt;
+            }
+
+            .s4 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: none;
+                font-size: 9pt;
+            }
+
+            .s5 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: normal;
+                font-weight: bold;
+                text-decoration: none;
+                font-size: 9pt;
+            }
+
+            .s6 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: none;
+                font-size: 8pt;
+            }
+
+            .s7 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: normal;
+                font-weight: bold;
+                text-decoration: none;
+                font-size: 10pt;
+            }
+
+            .s8 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: none;
+                font-size: 7pt;
+            }
+
+            .s9 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: normal;
+                font-weight: bold;
+                text-decoration: none;
+                font-size: 7pt;
+            }
+
+            .s10 {
+                color: black;
+                font-family: "Trebuchet MS", sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: none;
+                font-size: 12pt;
+            }
+
+            table,
+            tbody {
+                vertical-align: top;
+                overflow: visible;
+            }
+            #qr{
+                di: right;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <h1
+            style="padding-top: 4pt;padding-left: 11pt;text-indent: 0pt;text-align: center;">Tax
+            Invoice</h1>
+
+        <p style="text-indent: 0pt;text-align: left;"><br /></p>
+
+        <h2
+            style="padding-top: 7pt;padding-left: 11pt;text-indent: 0pt;text-align: left;">Sold
+            By: Buzz Retail India
+            Private Limited <span class="s1">,</span></h2>
+
+        <img width="64" height="64" class="qr"
+             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABAAQMAAACQp+OdAAAABlBMVEUAAAD///+l2Z/dAAAAAWJLR0QAiAUdSAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAklJREFUKJFjYLQO2GJrMqeBoZbtenfrXpt9DK7OKievmAosYnDlrtrkFPYIyPhauEHWZeIihlqrSu0jxcr7GBi9Vq0KDQ1qYPjf2PL7yA6H/wyGf/Q7JE0vX2BI979glc+8kZVhZqts5/v2ncZQxl5jhsuVojuvi/NlM/DuOX7w4p4zPAxJxhlzqs0eszKYNsy8++t7UykDs+3UwiU7YzIZVI/oa36xDMhiqOu5IFXvMlmbIfUTz9bfb/ZpMuyy3OO85ofdR4Ypexh9QgwmPGLYva9yX1TIR12Gp/0yiftYLi5mmGz7NfPGgmAvBofv2q1bVC9rMcgz3rD/rfrRkuHn8YSfv9X3dTOs75pvfey9vTfDg5rzCyRLJ3AxsJtlMN8OefCSYSsrx6k4gYaVCAY70wTlowsnvGYwMNZlEFHs42LI23vBpNLhIidD5peApWfZ9v5k4Opd+vDpzPmFDGt3d3rw7JgnxeBlXr11X+JGTQZWwy0b57kfOM2g1MJrULnF2YnhxxftHE4bPwOG7N4bVvzsn5sYUh0aHi8qffucgfnjlvDVL/5tZpC0dV8XYTjpEoMwcxbnrYIJjAxX/k93v+G0zpXh2teMm38LLnYzuHzWXZVj0WTIwL3lsulNpYeMDAeKKqfJBT/4imCIG30r/Pqzv5CBx6zxhMiKJiaG/46em2+wAr3D+KfKK0580nKGWsZlxgf22j1gcDVRfiFg0sPB4Prhhw6346EgBtctao6f3SdJMtS6WWa31N59yMBocXQJo43zAwCLIPYFguKAIgAAAABJRU5ErkJgggAA" />
+
+        <h3
+            style="padding-top: 2pt;padding-left: 11pt;text-indent: 0pt;line-height: 148%;text-align: left;">Ship-from
+            Address: <span class="p">Sy no 18/2,18/3,18/4
+                19/1,19/2,19/3,20/1,20/2,20/3,21/2,22/2,23/2,23/3,23/4
+                Taverekere
+                venkatapura, hosakote taluk, nadagudi hobli,bangalore 562122,
+                Bangalore, KARNATAKA, India - 562122,
+                IN-KA</span></h3>
+
+        <h2
+            style="padding-left: 11pt;text-indent: 0pt;line-height: 10pt;text-align: left;">GSTIN
+            <span class="s1">-
+                29AAECB1611P1ZJ</span></h2>
+
+        <p style="text-indent: 0pt;text-align: left;"><br /></p>
+
+        <h2 class="s2">Invoice Number #FAJH8F2300356095</h2>
+
+    <center>
+        <hr
+            style="height:2px; width:98%; color:black; background-color:black">
+    </center>
+
+    <div class="container">
+        <div class="order">
+            <h2 style="padding-top: 3pt;padding-left: 11pt;text-indent: 0pt;text-align: left;">Order ID: {{order_number}}
+            </h2>
+            <h2 style="padding-top: 7pt;padding-left: 11pt;text-indent: 0pt;text-align: left;">Order Start Date: <span class="s1">{{order_SDate}}</span></h2>
+            <h2 style="padding-top: 7pt;padding-left: 11pt;text-indent: 0pt;text-align: left;">Order End Date: <span class="s1">{{order_EDate}}</span></h2>
+            <h2 style="padding-top: 7pt;padding-left: 11pt;text-indent: 0pt;text-align: left;">Invoice Date: <span class="s1">08-08-2022</span></h2>
+            <h2 style="padding-top: 7pt;padding-left: 11pt;text-indent: 0pt;text-align: left;">PAN:
+                <span class="s1">AAECB1611P</span></h2>
+        </div>
+
+        <div class="customer">
+            <h2
+                style="padding-top: 5pt;padding-left: 7pt;text-indent: 0pt;line-height: 114%;text-align: left;">Bill
+                To
+                Sunilbhai</h2>
+            <p class="s1"
+               style="padding-left: 7pt;text-indent: 0pt;line-height: 114%;text-align: left;">M-354/55-NEW
+                TEXTILE
+                MARKET BEHIND NAWAB WADI RING ROAD</p>
+            <p class="s1"
+               style="padding-left: 7pt;text-indent: 0pt;line-height: 114%;text-align: left;">SURAT-,
+                Sarvodya
+                Creation, Begam Badi, Aanjada Nagar.</p>
+            <p class="s1"
+               style="padding-left: 7pt;text-indent: 0pt;line-height: 114%;text-align: left;">Surat
+                395002
+                Gujarat
+                Phone: xxxxxxxxxx</p>
+        </div>
+
+        <div class="address">
+            <h2
+                style="padding-top: 5pt;padding-left: 11pt;text-indent: 0pt;line-height: 114%;text-align: left;">Ship
+                To
+                Shubham
+                Lathiya</h2>
+            <p class="s1"
+               style="padding-left: 11pt;text-indent: 0pt;line-height: 114%;text-align: left;">B131/132,
+                Yogeshwer
+                society shyamdham chowk Punagam.. Surat 395010 Gujarat</p>
+            <p class="s1"
+               style="padding-left: 11pt;text-indent: 0pt;line-height: 10pt;text-align: left;">Phone:
+                xxxxxxxxxx</p>
+        </div>
+
+        <div class="info">
+            <p class="s3"
+               style="padding-left: 14pt;text-indent: -3pt;line-height: 148%;text-align: right;">*Keep
+                this
+                invoice
+                and manufacturer box for warranty purposes.</p>
+        </div>
+
+    </div>
+
+    <p class="s4"
+       style="padding-left: 12pt; text-indent: 0pt;line-height: 10pt;text-align: left;">Total
+        items: 1</p>
+
+    <center>
+        <hr
+            style="height:2px; width:98%; color:black; background-color:black">
+    </center>
+
+    <center>
+        <table style="border-collapse:collapse;margin-left:5.66pt"
+               cellspacing="0">
+            <tr style="height:11pt">
+                <td
+                    style="width:107pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                </td>
+                <td
+                    style="width:460pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454"
+                    colspan="7">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+            </tr>
+            <tr style="height:16pt">
+                <td
+                    style="width:107pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 3pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">
+                        Product</p>
+                </td>
+                <td
+                    style="width:156pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 3pt;padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">
+                        Title</p>
+                </td>
+                <td
+                    style="width:35pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 3pt;padding-left: 13pt;text-indent: 0pt;line-height: 10pt;text-align: left;">
+                        Qty
+                    </p>
+                </td>
+                <td
+                    style="width:52pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 3pt;padding-left: 5pt;padding-right: 4pt;text-indent: 0pt;line-height: 10pt;text-align: center;">
+                        Gross</p>
+                </td>
+                <td
+                    style="width:65pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 3pt;padding-left: 9pt;text-indent: 0pt;line-height: 10pt;text-align: left;">
+                        Discounts</p>
+                </td>
+                <td
+                    style="width:56pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 3pt;padding-left: 11pt;padding-right: 9pt;text-indent: 0pt;line-height: 10pt;text-align: center;">
+                        Taxable</p>
+                </td>
+                <td
+                    style="width:46pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 3pt;padding-left: 9pt;padding-right: 5pt;text-indent: 0pt;line-height: 10pt;text-align: center;">
+                        IGST ₹</p>
+                </td>
+                <td
+                    style="width:50pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 3pt;padding-left: 5pt;padding-right: 8pt;text-indent: 0pt;line-height: 10pt;text-align: center;">
+                        Total ₹</p>
+                </td>
+            </tr>
+            <tr style="height:15pt">
+                <td
+                    style="width:107pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td
+                    style="width:156pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td
+                    style="width:35pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td
+                    style="width:52pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s5"
+                       style="padding-left: 5pt;padding-right: 4pt;text-indent: 0pt;text-align: center;">
+                        Amount ₹
+                    </p>
+                </td>
+                <td
+                    style="width:65pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s5"
+                       style="padding-left: 6pt;text-indent: 0pt;text-align: left;">/Coupons
+                        ₹</p>
+                </td>
+                <td
+                    style="width:56pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s5"
+                       style="padding-left: 11pt;padding-right: 9pt;text-indent: 0pt;text-align: center;">
+                        Value ₹
+                    </p>
+                </td>
+                <td
+                    style="width:46pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td
+                    style="width:50pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+            </tr>
+            <tr style="height:60pt">
+                <td
+                    style="width:107pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                    <p class="s6"
+                       style="padding-left: 2pt;text-indent: 0pt;text-align: left;">Neckband</p>
+                    <p class="s6"
+                       style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">FSN:
+                        ACCFZ95MY8SGZQRT</p>
+                    <p class="s4"
+                       style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">HSN/SAC:
+                        85183000</p>
+                </td>
+                <td
+                    style="width:156pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p class="s7"
+                       style="padding-top: 8pt;padding-left: 2pt;padding-right: 25pt;text-indent: 0pt;line-height: 12pt;text-align: left;">
+                        boAt Rockerz 255 Pro+ with ASAP Charge and upto 40
+                        Hours Playback Bluetooth Headset</p>
+                </td>
+                <td
+                    style="width:35pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                    <p class="s4"
+                       style="padding-left: 5pt;text-indent: 0pt;text-align: center;">1</p>
+                </td>
+                <td
+                    style="width:52pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                    <p class="s4"
+                       style="padding-left: 5pt;padding-right: 4pt;text-indent: 0pt;text-align: center;">
+                        1099.00
+                    </p>
+                </td>
+                <td
+                    style="width:65pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                    <p class="s4"
+                       style="padding-left: 20pt;text-indent: 0pt;text-align: left;">0.00</p>
+                </td>
+                <td
+                    style="width:56pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                    <p class="s4"
+                       style="padding-left: 11pt;padding-right: 9pt;text-indent: 0pt;text-align: center;">
+                        931.36
+                    </p>
+                </td>
+                <td
+                    style="width:46pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                    <p class="s4"
+                       style="padding-left: 9pt;padding-right: 5pt;text-indent: 0pt;text-align: center;">
+                        167.64
+                    </p>
+                </td>
+                <td
+                    style="width:50pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                    <p class="s4"
+                       style="padding-left: 5pt;padding-right: 8pt;text-indent: 0pt;text-align: center;">
+                        1099.00
+                    </p>
+                </td>
+            </tr>
+            <tr style="height:12pt">
+                <td style="width:107pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:156pt">
+                    <p class="s8"
+                       style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">
+                        Warranty: 1
+                        Year Warranty from the Date of</p>
+                </td>
+                <td style="width:35pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:52pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:65pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:56pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:46pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:50pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+            </tr>
+            <tr style="height:12pt">
+                <td style="width:107pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:156pt">
+                    <p class="s8"
+                       style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">Purchase
+                    </p>
+                </td>
+                <td style="width:35pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:52pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:65pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:56pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:46pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:50pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+            </tr>
+            <tr style="height:15pt">
+                <td style="width:107pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:156pt">
+                    <p class="s9"
+                       style="padding-top: 1pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">IGST:
+                        <span class="s8">18.0 %</span></p>
+                </td>
+                <td style="width:35pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:52pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:65pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:56pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:46pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td style="width:50pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+            </tr>
+            <tr style="height:30pt">
+                <td style="width:107pt">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td
+                    style="width:156pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 4pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">Shipping
+                        And
+                        Convenience Charges</p>
+                </td>
+                <td
+                    style="width:35pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s4"
+                       style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: center;">1</p>
+                </td>
+                <td
+                    style="width:52pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s4"
+                       style="padding-top: 4pt;padding-left: 5pt;padding-right: 4pt;text-indent: 0pt;text-align: center;">
+                        40.00</p>
+                </td>
+                <td
+                    style="width:65pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s4"
+                       style="padding-top: 4pt;padding-left: 16pt;text-indent: 0pt;text-align: left;">-40.00
+                    </p>
+                </td>
+                <td
+                    style="width:56pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s4"
+                       style="padding-top: 4pt;padding-left: 11pt;padding-right: 9pt;text-indent: 0pt;text-align: center;">
+                        0.00</p>
+                </td>
+                <td
+                    style="width:46pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s4"
+                       style="padding-top: 4pt;padding-left: 9pt;padding-right: 5pt;text-indent: 0pt;text-align: center;">
+                        0.00</p>
+                </td>
+                <td
+                    style="width:50pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s4"
+                       style="padding-top: 4pt;padding-left: 5pt;padding-right: 8pt;text-indent: 0pt;text-align: center;">
+                        0.00</p>
+                </td>
+            </tr>
+            <tr style="height:27pt">
+                <td
+                    style="width:107pt;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+                </td>
+                <td
+                    style="width:156pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 8pt;padding-left: 69pt;padding-right: 63pt;text-indent: 0pt;text-align: center;">
+                        Total</p>
+                </td>
+                <td
+                    style="width:35pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 8pt;padding-left: 8pt;text-indent: 0pt;text-align: left;">1</p>
+                </td>
+                <td
+                    style="width:52pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 8pt;padding-left: 5pt;padding-right: 4pt;text-indent: 0pt;text-align: center;">
+                        1139.00</p>
+                </td>
+                <td
+                    style="width:65pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 8pt;padding-left: 16pt;text-indent: 0pt;text-align: left;">-40.00
+                    </p>
+                </td>
+                <td
+                    style="width:56pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 8pt;padding-left: 11pt;padding-right: 9pt;text-indent: 0pt;text-align: center;">
+                        931.36</p>
+                </td>
+                <td
+                    style="width:46pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 8pt;padding-left: 9pt;padding-right: 5pt;text-indent: 0pt;text-align: center;">
+                        167.64</p>
+                </td>
+                <td
+                    style="width:50pt;border-top-style:solid;border-top-width:1pt;border-top-color:#545454;border-bottom-style:solid;border-bottom-width:1pt;border-bottom-color:#545454">
+                    <p class="s5"
+                       style="padding-top: 8pt;padding-left: 5pt;padding-right: 8pt;text-indent: 0pt;text-align: center;">
+                        1099.00</p>
+                </td>
+            </tr>
+        </table>
+    </center>
+
+    <center>
+        <hr
+            style="margin-top: 30px; height:2px; width:98%; color:black; background-color:black">
+    </center>
+
+    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+    <p class="s10"
+       style="padding-top: 4pt;text-indent: 0pt;text-align: right; margin-right: 15px;">Grand Total ₹
+        <b>{{order_TotalAmount}}</b></p>
+    <p class="s1"
+       style="padding-top: 8pt;text-indent: 0pt;text-align: right; margin-right: 15px;">Buzz
+        Retail India
+        Private Limited</p>
+    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+    <p class="s1"
+       style="padding-bottom: 3pt;text-indent: 0pt;text-align: right;margin-right: 15px; margin-top: 30px;">
+        Authorized Signatory</p>
+    <p
+        style="padding-left: 5pt;text-indent: 0pt;line-height: 1pt;text-align: left;" />
+    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+    <p style="padding-left: 504pt;text-indent: 0pt;text-align: left;"></p>
+
+    <center>
+        <hr
+            style="margin-top: 0px; height:2px; width:98%; color:black; background-color:black">
+    </center>
+
+    <img style="margin-right: 15px; margin-top: 5px;margin-bottom: 15px;"
+         width="87" height="54"
+         src="data:image/jpg;base64,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" />
+</body>
+
+</html>
